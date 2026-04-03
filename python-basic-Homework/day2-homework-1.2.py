@@ -11,6 +11,6 @@ interface = "GigabitEthernet0/0/1"
 """
 
 interface = "GigabitEthernet0/0/1"
-print('接口类型：'+'interface[:-5]')
-print('接口编号：'+'interface[-5:]')
+print('接口类型：'+interface[:-5])
+print('接口编号：'+interface[-5:])
 
