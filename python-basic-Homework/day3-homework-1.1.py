@@ -10,4 +10,14 @@ MAC   : 54a2.74f7.0326
 Type  : DYNAMIC
 Port  : Gi1/0/11
 """
+import re
+
+mac_table = '166    54a2.74f7.0326    DYNAMIC     Gi1/0/11'
+
+resault=re.match('(^\d+)\s+([0-9a-f.]+)\s+(\w+)\s+(\w\S+\d)',mac_table).groups()
+print('VLAN  : {}'.format(resault[0]))
+print('MAC   : {}'.format(resault[1]))
+print('Type  : {}'.format(resault[2]))
+print('Port  : {}'.format(resault[3]))
+
 
