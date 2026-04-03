@@ -9,7 +9,7 @@ message = "%LINK-3-UPDOWN: Interface GigabitEthernet0/1, changed state to down"
 #print(syslog)
 
 #新方法f-string：
-syslog_format = '{date}  {hostname}  {level}  {message}'
-syslog = syslog_format.format(date=date,hostname=hostname,level=level,message=message)  
+syslog = f'{date}  {hostname}  {level}  {message}'
 print(syslog)
+
 
