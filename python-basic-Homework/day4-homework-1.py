@@ -28,9 +28,21 @@ Ping 196.21.5.1 ... reachable
 """
 
 import os
+import re
+
 result = os.popen("ifconfig ens160").read()
-print(result)
-ping_result = os.popen('ping -c 4 192.168.2.200').read()
+
+m = re.match(
+    r"[\s\S]*inet\s+(\d{1,3}(?:\.\d{1,3}){3})\s+netmask\s+(\d{1,3}(?:\.\d{1,3}){3})\s+broadcast\s+(\d{1,3}(?:\.\d{1,3}){3})[\s\S]*ether\s+([0-9a-f:]+)",
+    result,
+).groups()
+print("IP        : {}".format(m[0]))
+print("Netmask   : {}".format(m[1]))
+print("Broadcast : {}".format(m[2]))
+print("MAC       : {}".format(m[3]))
+
+GW = (m[0]).replace('200','1')
+ping_result = os.popen(f'ping -c 4 {GW}').read()
 print(ping_result)
 
 
