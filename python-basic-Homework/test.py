@@ -1,10 +1,3 @@
-import re
-line = "TCP Student 192.168.189.167:32806 Teacher 137.78.5.128:65247, idle 0:00:00, bytes 74, flags UIO\nTCP Student 192.168.189.167:80 Teacher 137.78.5.128:65233, idle 0:00:03, bytes 334516, flags UIO"
+port_list = ['eth 1/101/1/42','eth 1/101/1/26','eth 1/101/1/23','eth 1/101/1/7','eth 1/101/2/46','eth 1/101/1/34','eth 1/101/1/18','eth 1/101/1/13','eth 1/101/1/32','eth 1/101/1/25','eth 1/101/1/45','eth 1/101/2/8']
 
-#pattern = r'(\d{1,3}(?:\.\d{1,3}){3}):(\d+)\s+\w+\s+(\d{1,3}(?:\.\d{1,3}){3}):(\d+).*bytes (\d+).*flags (\w+)'
-pattern = r'TCP Student (\d+\.\d+\.\d+\.\d+):(\d+) Teacher (\d+\.\d+\.\d+\.\d+):(\d+).*bytes (\d+).*flags (\w+)'
-
-
-match = re.match(pattern, line)
-if match:
-    print(match.groups())
+port_list.spli
