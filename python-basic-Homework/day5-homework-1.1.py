@@ -17,9 +17,9 @@ Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
 
 import os
 import re
-
+#获取路由表
 route = os.popen("route -n").read()
-
-DEF_Route = re.match("(?:^|\n)0\.0\.0\.0\s+(\d{1,3}(?:\.\d{1,3}){3})[^\n]*UG",route).groups()
-print(DEF_Route)
-#print("网关为: {}".format(result[1]))
+#正则表达式匹配
+match = re.search(r'(?:^|\n)0\.0\.0\.0\s+(\d+\.\d+\.\d+\.\d+).*UG', route).groups()
+#打印
+print("网关为:", match[0])
