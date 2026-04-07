@@ -35,5 +35,6 @@ from day9.day09_task01_ssh_gateway import ssh_run
 注意：连接思科路由器时，需确保第九天的 ssh_run 函数中 ssh.connect() 包含 look_for_keys=False, allow_agent=False，否则 paramiko 会先尝试密钥认证导致连接失败。
 """
 
-import day8-homework-1.2 
+import day8_homework_1.2
+
 
