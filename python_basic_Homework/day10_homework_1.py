@@ -35,6 +35,32 @@ from day9.day09_task01_ssh_gateway import ssh_run
 注意：连接思科路由器时，需确保第九天的 ssh_run 函数中 ssh.connect() 包含 look_for_keys=False, allow_agent=False，否则 paramiko 会先尝试密钥认证导致连接失败。
 """
 
-import day8_homework_1.2
+import sys, os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from day8_homework_1_2 import ping_check
+from day9_homework_1 import ssh_exec_command
+
+ip = ['10.10.1.1', '10.10.1.2', '192.168.100.1']#其中192.168.100.1不是网络中真实可达的IP模拟不可达
+username = 'admin'
+password = 'Metax@123'
+
+
+def show_interfaces(ip_list, username, password):
+    """
+    遍历 IP 列表，ping 通则采集接口信息
+    """
+    for ip in ip_list:
+        is_reachable, rtt = ping_check(ip)
+        
+        if is_reachable:
+            print(f"[*] {ip} 可达，正在采集...")
+            output = ssh_exec_command(ip, username, password, 'show ip interface brief')
+            print(f"---------- {ip} 接口信息 ----------")
+            print(output)
+        else:
+            print(f"[x] {ip} 不可达，跳过。")
+
+# 调用
+show_interfaces(ip, username, password)
 
 

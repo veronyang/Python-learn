@@ -16,14 +16,13 @@ ssh = paramiko.SSHClient()
 ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 ssh.connect('10.10.1.200', port=22, username='root', password='Metax@123', timeout=5, look_for_keys=False, allow_agent=False)
 stdin, stdout, stderr = ssh.exec_command('hostname')
-print(stdout.read().decode())
 ssh.close()
 
 def ssh_exec_command(host,username,password,command):
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     ssh.connect(host, port=22, username=username, password=password, timeout=5, look_for_keys=False, allow_agent=False)
-    stdin, stdout, stderr = ssh.exec_command('route -n')
+    stdin, stdout, stderr = ssh.exec_command(command)
     output = stdout.read().decode()
     ssh.close()
     return output
