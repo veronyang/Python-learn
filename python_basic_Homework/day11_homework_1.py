@@ -41,6 +41,10 @@ C8Kv1(config)#
 """
 
 import paramiko
+import re
+import hashlib
+import time
+
 
 def ssh_run(host,username,password,command):
     ssh = paramiko.SSHClient()
@@ -54,7 +58,24 @@ def ssh_run(host,username,password,command):
 host = "10.10.1.1"
 username = "admin"
 password = "Metax@123"
-showrun = ssh_run(host, username, password, "show running-config")
-match = (f'^hostname')
 
-print(showrun)
+
+def get_config_md5(hostname,username,password):
+    output = ssh_run(host, username, password, "show running-config")
+    match = re.search(r'(hostname[\s\S]+end)', output)
+    if match:
+        config_text = (match.group())
+    else:
+        config_text = output
+    return
+hashlib.md5(config_text.encode()).hexdigest()
+
+
+
+
+
+
+
+
+
+
