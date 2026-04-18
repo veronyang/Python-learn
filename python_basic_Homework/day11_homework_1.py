@@ -60,15 +60,30 @@ username = "admin"
 password = "Metax@123"
 
 
-def get_config_md5(hostname,username,password):
+def get_config(host,username,password):
     output = ssh_run(host, username, password, "show running-config")
     match = re.search(r'(hostname[\s\S]+end)', output)
     if match:
-        config_text = (match.group())
+        return match.group()
+    return output
+
+
+def get_md5(hash_result):
+    return hashlib.md5(hash_result.encode()).hexdigest()
+
+last_md5 = get_md5(get_config(host, username, password))
+
+while True:
+    time.sleep(5)
+    current_config = get_config(host, username, password)
+    current_md5 = get_md5(current_config)
+
+    if current_md5 == last_md5:
+        print(f"[*] 当前配置 MD5: {current_md5}")
     else:
-        config_text = output
-    return
-hashlib.md5(config_text.encode()).hexdigest()
+        print(f"[!] 告警: 配置已改变！新 MD5: {current_md5}")
+        break
+
 
 
 
