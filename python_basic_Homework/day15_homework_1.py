@@ -63,6 +63,7 @@ if __name__ == '__main__':
         for device in device_list:
             session.add(Device(**device))
         session.commit()
+        print("[+] 初始设备数据已写入数据库")
 
     while True:
         print("\n请输入查询选项:")
