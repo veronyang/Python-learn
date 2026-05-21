@@ -62,19 +62,23 @@ def qytang_multicmd(ip, username, password, cmd_list, enable='', wait_time=2, ve
         time.sleep(1)
         chan.recv(65535)
     
+    all_output = ''
     for cmd in cmd_list:
         chan.send((cmd + '\n').encode())
         time.sleep(wait_time)
         output = chan.recv(65535).decode()
+        all_output += output
 
         if verbose:
             print(f'--- {cmd} ---')
             print(output)
 
     ssh.close()
+    return all_output
 
 
 
-qytang_multicmd(ip, username, password, cmd_list, enable)
+if __name__ == '__main__':
+    qytang_multicmd(ip, username, password, cmd_list, enable)
 
 
