@@ -1,5 +1,6 @@
 
 """
+##初始化
 ssh = paramiko.SSHClient()
 ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 ssh.connect('10.10.1.1', port=22, username='admin', password='Metax@123',
