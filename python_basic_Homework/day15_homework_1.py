@@ -9,7 +9,7 @@ name：设备名称（如 R1、SW1），带索引
 type：设备类型（如 router、switch、firewall）
 version：系统版本（如 IOS XE 17.14）
 location：机房位置（如 Beijing-IDC-A）
-create_time：入库时间，自动填写当前时间
+create_time：入库时间，自动填写当前时间；
 """
 
 import datetime
